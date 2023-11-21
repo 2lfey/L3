@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>New post</title>
+{% endblock %}
+
+{% block main %}
+
+<div class="">
+  <form action="" method="post" enctype="multipart/form-data" class="">
+    {%csrf_token%}
+    {{form.as_p}}
+    
+    <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white py-1.5 px-3 rounded">Create post</button>
+  </form>
+</div>
+
+{% endblock %}

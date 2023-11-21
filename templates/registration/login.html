@@ -1,0 +1,36 @@
+{% extends 'base.html'%}
+
+{% block head %}
+<title>Login</title>
+{% endblock %}
+
+{% block main %}
+<div class="h-full flex items-center justify-center">
+
+  <div class="p-4 rounded-lg w-fit border">
+
+    <h1 class="mb-4 text-center font-bold text-2xl">Login</h1>
+
+    <form class="flex flex-col items-center justify-center gap-4" action="" method="post">
+      {% csrf_token %}
+    
+      <div class="space-y-2">
+        <label for="id_username" class="block mb-2 text-sm font-medium text-gray-900">Username</label>
+        <input type="text" id="id_username" name="username" maxlength="150"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 outline-none"
+          placeholder="Qwerty" required>
+      </div>
+    
+      <div class="space-y-2">
+        <label for="id_password" class="block mb-2 text-sm font-medium text-gray-900">Password</label>
+        <input type="password" id="id_password" name="password" maxlength="128"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 outline-none"
+          placeholder="VerySectret123" required>
+      </div>
+    
+      <button class="block bg-blue-500 hover:bg-blue-700 text-white py-1.5 px-3 rounded" type="submit">Login</button>
+    </form>
+  </div>
+
+</div>
+{% endblock %}

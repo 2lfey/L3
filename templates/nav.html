@@ -1,0 +1,14 @@
+
+<nav class="flex w-full justify-between gap-2 font-medium">
+  <a class="hover:text-gray-600" href="{% url 'posts' %}">Posts</a>
+
+  <div class="space-x-4">
+    {% if request.user.is_authenticated %}
+    <a class="hover:text-gray-600" href="{% url 'user-profile' request.user.id %}">Profile</a>
+    <a class="hover:text-gray-600" href="{% url 'logout' %}">Logout</a>
+    {% else %}
+    <a class="hover:text-gray-600" href="{% url 'login' %}">Login</a>
+    <a class="hover:text-gray-600" href="{% url 'register' %}">Register</a>
+    {% endif %}
+  </div>
+</nav>

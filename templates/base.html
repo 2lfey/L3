@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  {% block head %}
+  <title>Document</title>
+  {% endblock %}
+</head>
+
+<body class="flex flex-col h-screen">
+  <header class="flex justify-between items-center w-full max-w-5xl mx-auto p-4 border-b">
+    {% block header %}
+    {% include 'nav.html' %}
+    {% endblock %}
+  </header>
+  <main class="flex-1 w-full max-w-5xl mx-auto">
+    {% block main %}
+    {% endblock %}
+  </main>
+  <footer class="w-full max-w-5xl mx-auto">
+    {% block footer %}
+    {% endblock %}
+  </footer>
+</body>
+
+</html>
