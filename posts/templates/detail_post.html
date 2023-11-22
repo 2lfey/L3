@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block head %}
+{% if post.title %}
+<title>
+  {{post.author.username}} - {{post.title}}
+</title>
+{% else %}
+<title>Post</title>
+{% endif %}
+
+{% endblock %}
+
+
+{% block main %}
+<!-- Post -->
+<div class="">
+  {% if post.title %}
+  <h1 class="my-4 text-center font-bold text-2xl">
+    {{post.title}}
+  </h1>
+  {% endif %}
+
+
+  {% if post.image %}
+  <div class="">
+    <img src="{{post.image.url}}" class="" alt="img">
+  </div>
+  {% endif %}
+
+  <div class="">
+    <p>{{post.content}}</p>
+  </div>
+
+  <!-- Post footer -->
+  <div class="flex justify-between text-sm">
+
+    <!-- Author -->
+
+    <a href="{% url 'user-profile' post.author.pk %}" class="flex items-center gap-4">
+      {% if post.author.avatar %}
+      <div class="shrink-0">
+        <img class="block rounded-full w-8 h-8" src="{{post.author.avatar.url}}" alt="avatar">
+      </div>
+      {% endif %}
+
+      <span class="">{{post.author.username}}</span>
+    </a>
+
+    <!-- Hashtags -->
+
+    {% if post.hashtags.all %}
+    <div class="">
+      {% for hashtag in post.hashtags.all %}
+      <a class="block text-sm text-blue-500 hover:text-blue-700 underline" href="#">{{hashtag}}</a>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- Date created / edited -->
+    <div class="flex items-center">
+      <p>
+        {% if post.created_at == post.updated_at %}
+          {{post.created_at|timesince}}
+        {% else %}
+
+          Edited {{post.updated_at|timesince}}
+
+        {% endif %}
+      </p>
+      
+    </div>
+
+  </div>
+
+</div>
+
+<hr class="my-4">
+
+<!-- Comments -->
+<div class="">
+  {% if comments %}
+  <h2 class="my-4 text-center font-bold text-2xl">Comments</h2>
+  {% else %}
+  <h2 class="my-4 text-center font-bold text-2xl">No comments</h2>
+  {% endif %}
+</div>
+{% endblock %}

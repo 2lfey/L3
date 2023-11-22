@@ -18,13 +18,13 @@ class CreatePostForm(forms.ModelForm):
         )
 
     def clean(self):
-        self.cleaned_data['author_id'] = self.user.id
+        self.cleaned_data['author'] = self.user
         super().clean()
 
     def save(self, commit=True):
-        post = super().save()
+        post = super().save(commit=False)
         
-        post.author.id = self.cleaned_data['author_id']
+        post.author = self.cleaned_data['author']
 
         if commit:
             post.save()
