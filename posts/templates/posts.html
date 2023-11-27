@@ -1,54 +1,62 @@
 {% extends 'base.html' %}
 
+{% block head %}
+<title>Posts</title>
+{% endblock %}
+
 {% block main %}
 
 {% if posts %}
-<div class="py-4 my-4 gap-4 grid grid-cols-3">
+<section class="grid grid-cols-3 gap-4">
   {% for post in posts %}
-  <a class="block" href="{% url 'detail-post' post.pk %}">
-    <div class="border rounded-md flex flex-col gap-4 p-4">
+  <a href="{% url 'detail-post' post.pk %}"
+    class="p-4 bg-gray-100 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-900 transition-colors duration space-y-2 rounded-md">
+    <!-- Header -->
+    {% if post.hashtags.all %}
+    <div class="">
 
-      <div class="">
-        <div class="flex items-center gap-4">
-        
-          {% if post.author.avatar %}
-          <div class="shrink-0">
-            <img class="block rounded-full w-8 h-8" src="{{post.author.avatar.url}}" alt="avatar">
-          </div>
-          {% endif %}
-        
-          <span class="">{{post.author.username}}</span>
-        </div>
-        
-        {% if post.hashtags.all %}
-        <div class="">
-          {% for hashtag in post.hashtags.all %}
-          <a class="block text-sm text-blue-500 hover:text-blue-700 underline" href="#">{{hashtag}}</a>
-          {% endfor %}
-        </div>
-        {% endif %}
-      </div>
+      {% for hashtag in post.hashtags.all %}
+      <span>{{hashtag}}</span>
+      {% endfor %}
+    </div>
 
+    {% endif %}
+
+    <!-- Body -->
+    <div class="items-center gap-4">
       {% if post.image %}
-      <div class="">
-        <img src="{{post.image.url}}" class="" alt="img">
-      </div>
+      <img src="{{post.image.url}}" class="" alt="img">
       {% endif %}
 
       <p class="w-full">{{post.title}}</p>
       <p class="w-full">{{post.content}}</p>
+    </div>
 
-      <!-- <div class="grid grid-cols-2 gap-4"> -->
-        <!-- {% if request.user == post.author %} -->
-        <!-- <a class="bg-blue-500 text-center hover:bg-blue-700 text-white py-1.5 px-3 rounded" href="#">Edit</a> -->
-        <!-- <a class="bg-red-500 hover:bg-red-700 text-white py-1.5 px-3 rounded" href="#">Delete</a> -->
-        <!-- {% endif %} -->
-      <!-- </div> -->
+    <!-- Footer -->
+
+    <div class="flex justify-between items-center">
+      <!-- Author -->
+      <div class="flex items-center gap-2">
+        {% if post.author.avatar %}
+        <img class="h-10 w-10 rounded-full" src="{{post.author.avatar.url}}" alt="Author avatar">
+        {% endif %}
+
+        <span class="text-xs">
+          {{post.author.username}}
+        </span>
+      </div>
+
+      <!-- Date -->
+      <div class="">
+        <span class="text-xs">
+          {{post.time}}
+        </span>
+      </div>
 
     </div>
   </a>
   {% endfor %}
-</div>
+</section>
 {% else %}
 <h1 class="my-4 text-center font-bold text-2xl">No posts</h1>
 {% endif %}
@@ -56,10 +64,27 @@
 {% endblock %}
 
 {% block footer %}
+
 {% if posts %}
-<div class="flex items-center justify-center gap-4">
-  <a class="bg-blue-500 hover:bg-blue-700 text-white py-1.5 px-3 rounded" href="#"><<- Previous page</a>
-  <a class="bg-blue-500 hover:bg-blue-700 text-white py-1.5 px-3 rounded" href="#">Next page ->></a>
+<div class="flex flex-col gap-4">
+  <div class="flex items-center justify-center gap-4">
+    <a class="px-3 py-1.5 font-semibold text-sm bg-primary-500 hover:bg-primary-700 rounded text-white" href="#">
+      <<- Previous page </a>
+
+        <a class="px-3 py-1.5 font-semibold text-sm bg-primary-500 hover:bg-primary-700 rounded text-white" href="#">
+          Next page ->>
+        </a>
+  </div>
+
+  {% include 'components/copyright.html' %}
+
 </div>
+
+{% else %}
+
+{% include 'components/copyright.html' %}
+
 {% endif %}
+
+
 {% endblock %}

@@ -1,29 +1,121 @@
+</html>
+
 <!DOCTYPE html>
-<html lang="en">
+<html class="dark" lang="en">
 
 <head>
+  <!-- Other meta tags -->
+
   <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Document settings -->
+
   {% block head %}
   <title>Document</title>
   {% endblock %}
+
+  <!-- Open Graph -->
+
+  <meta property="og:title" content=title>
+  <meta property="og:site_name" content=site name>
+  <meta property="og:url" content=site url>
+  <meta property="og:description" content=Description>
+  <meta property="og:type" content=website>
+  <meta property="og:image" content=https://img.example.com/example.png>
+
+  <!-- Preloading -->
+
+  <!-- CDN -->
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  {% load static %}
+
+  <!-- Scripts -->
+  <script src="{% static 'js/toggleTheme.js' %}" defer></script>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="{% static 'css/fonts.css' %}">
+
+  <!-- <link rel="stylesheet" href="style.css"> -->
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        colors: {
+          ...tailwind.colors,
+          primary: {
+            50: '#f5f3ff',
+            100: '#ede9fe',
+            200: '#ddd6fe',
+            300: '#c4b5fd',
+            400: '#a78bfa',
+            500: '#8b5cf6',
+            600: '#7c3aed',
+            700: '#6d28d9',
+            800: '#5b21b6',
+            900: '#4c1d95',
+            950: '#2e1065',
+          },
+        },
+        fontFamily: {
+          'nunito-sans': 'Nunito-Sans'
+        },
+      },
+    }
+  </script>
+
+  <script>
+    const currentTheme = localStorage.getItem("theme")
+    if (currentTheme == "dark" || ( !currentTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add("dark")
+    } else {
+      document.documentElement.classList.remove("dark")
+    }
+  </script>
+
 </head>
 
-<body class="flex flex-col h-screen">
-  <header class="flex justify-between items-center w-full max-w-5xl mx-auto p-4 border-b">
-    {% block header %}
-    {% include 'nav.html' %}
-    {% endblock %}
-  </header>
-  <main class="flex-1 w-full max-w-5xl mx-auto">
-    {% block main %}
-    {% endblock %}
-  </main>
-  <footer class="w-full max-w-5xl mx-auto py-4">
-    {% block footer %}
-    {% endblock %}
-  </footer>
+<body class="bg-gray-200 font-nunito-sans dark:bg-gray-800 dark:text-white transition-colors duration">
+
+  <!-- Container with max width 1024px -->
+
+  <div class="min-h-screen mx-auto max-w-5xl flex flex-col">
+
+    <!-- Header -->
+
+    <header class="py-4 w-full">
+
+      {% block header %}
+      {% include 'components/nav.html' %}
+      {% endblock %}
+
+    </header>
+
+    <!-- Main -->
+
+    <main class="flex-1 py-4 w-full">
+      {% block main %}
+      {% endblock %}
+    </main>
+
+    <!-- Footer -->
+
+    <footer class="py-4 w-full">
+
+      {% block footer %}
+
+      {% include 'components/copyright.html' %}
+
+      {% endblock %}
+
+    </footer>
+
+  </div>
+
 </body>
 
 </html>

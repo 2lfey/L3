@@ -19,11 +19,11 @@
 {% endblock %}
 
 {% block main %}
-<div class="">
-  <h1 class="my-4 text-center font-bold text-2xl">
-    Profile {{obj}}
-  </h1>
+<h1 class="text-2xl font-bold text-center">
+  Profile {{obj}}
+</h1>
 
+<section class="">
   <form action="" class="flex flex-col align-center gap-4" method="post" enctype="multipart/form-data">
     {% csrf_token %}
 
@@ -41,18 +41,18 @@
 
         <div class="absolute top-0 left-0 w-48 h-48 flex items-center justify-center">
           <label for="id_avatar"
-            class="hidden group-hover:flex flex-col items-center justify-center w-48 h-48 border-2 border-gray-300 border-dashed rounded-full cursor-pointer bg-gray-50/50">
+            class="invisible group-hover:visible flex opacity-0 group-hover:opacity-100 duration-500 transition-opacity flex-col items-center justify-center w-48 h-48 border-2 border-gray-300 border-dashed rounded-full cursor-pointer bg-gray-50/50 dark:bg-gray-900/50">
             <!-- bg-gray-50 hover:bg-gray-100 -->
             <div class="flex flex-col items-center justify-center pt-5 pb-6">
-              <svg class="w-6 h-6 mb-2 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+              <svg class="w-6 h-6 mb-2 text-gray-500 dark:text-gray-600" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                 viewBox="0 0 20 16">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                   d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
               </svg>
-              <p class="mb-2 text-center text-sm text-gray-500 font-semibold">
+              <p class="mb-2 text-center text-sm text-gray-500 dark:text-gray-600 font-semibold">
                 Click to upload
               </p>
-              <p class="text-xs text-center text-gray-500">
+              <p class="text-xs text-center text-gray-500 dark:text-gray-600">
                 SVG, PNG, JPG or GIF
               </p>
             </div>
@@ -68,40 +68,41 @@
 
       <div class="w-48 h-48 flex items-center justify-center">
         <label for="id_avatar"
-          class="flex flex-col items-center justify-center w-48 h-48 border-2 border-gray-300 border-dashed rounded-full cursor-pointer bg-gray-50/50">
-          <!-- bg-gray-50 hover:bg-gray-100 -->
-          <div class="flex flex-col items-center justify-center pt-5 pb-6">
-            <svg class="w-6 h-6 mb-2 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-              viewBox="0 0 20 16">
-              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
-            </svg>
-            <p class="mb-2 text-center text-sm text-gray-500 font-semibold">
-              Click to upload
-            </p>
-            <p class="text-xs text-center text-gray-500">
-              SVG, PNG, JPG or GIF
-            </p>
-          </div>
+            class="flex flex-col items-center justify-center w-48 h-48 border-2 border-gray-300 border-dashed rounded-full cursor-pointer bg-gray-50/50 dark:bg-gray-900/50">
+            <!-- bg-gray-50 hover:bg-gray-100 -->
+            <div class="flex flex-col items-center justify-center pt-5 pb-6">
+              <svg class="w-6 h-6 mb-2 text-gray-500 dark:text-gray-600" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                viewBox="0 0 20 16">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
+              </svg>
+              <p class="mb-2 text-center text-sm text-gray-500 dark:text-gray-600 font-semibold">
+                Click to upload
+              </p>
+              <p class="text-xs text-center text-gray-500 dark:text-gray-600">
+                SVG, PNG, JPG or GIF
+              </p>
+            </div>
 
-          <input id="id_avatar" name="avatar" type="file" accept="image/*" class="hidden" />
+            <input id="id_avatar" name="avatar" type="file" accept="image/*" class="hidden" />
 
-        </label>
+          </label>
       </div>
 
       {% endif %}
 
       <div class="w-full">
-        <label for="message" class="block mb-2 text-sm font-medium text-gray-900">Summary</label>
+        <label for="message" class="block ml-2 mb-2 text-sm font-medium dark:text-white">Summary</label>
         <textarea id="message" rows="4" name="summary" maxlength="2000" id="id_summary"
-          class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300"
+          class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-500 dark:text-white"
           placeholder="Write your thoughts here...">{{form.summary.value}}</textarea>
       </div>
 
     </div>
 
-    <button class="ml-auto w-fit bg-blue-500 hover:bg-blue-700 text-white py-1.5 px-3 rounded"
-      type="submit">Save</button>
+    <button type="submit" class="ml-auto inline-block px-3 py-1.5 font-semibold text-sm bg-primary-500 hover:bg-primary-700 rounded text-white duration transition-colors">
+      Save
+    </button>
   </form>
-</div>
+</section>
 {% endblock %}

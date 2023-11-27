@@ -1,0 +1,18 @@
+
+<nav class="flex w-full justify-between gap-2 font-sm">
+  <a class="hover:text-primary-500 duration transition-colors" href="{% url 'posts' %}">Posts</a>
+
+  <div class="space-x-4">
+    {% if request.user.is_authenticated %}
+    <a class="hover:text-primary-500 duration transition-colors" href="{% url 'user-profile' request.user.id %}">Profile</a>
+    <a class="hover:text-primary-500 duration transition-colors" href="{% url 'logout' %}">Logout</a>
+    {% else %}
+    <a class="hover:text-primary-500 duration transition-colors" href="{% url 'login' %}">Login</a>
+    <a class="hover:text-primary-500 duration transition-colors" href="{% url 'register' %}">Register</a>
+    {% endif %}
+    <button id="toggleTheme" class="px-3 py-1.5 font-semibold text-sm bg-primary-500 hover:bg-primary-700 rounded text-white">
+      Change theme
+    </button>
+    
+  </div>
+</nav>

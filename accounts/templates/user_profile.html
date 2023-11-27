@@ -1,12 +1,13 @@
 {% extends "base.html" %}
 
 {% block main %}
-<div class="">
-  <h1 class="my-4 text-center font-bold text-2xl">
-    Profile {{obj}}
-    <a class="text-sm text-blue-500 hover:text-blue-700 underline" href="{% url 'profile' %}">edit</a>
-  </h1>
+<h1 class="my-4 text-center font-bold text-2xl">
+  Profile {{obj}}
+  <a class="text-sm text-blue-500 hover:text-blue-700 underline" href="{% url 'profile' %}">edit</a>
+</h1>
 
+<section class="">
+  
   <div class="flex gap-4">
     <div class="shrink-0">
       {% if obj.avatar %}
@@ -15,7 +16,7 @@
     </div>
 
     <div class="w-full h-full">
-      <p class="h-fit border rounded-md w-full px-4 py-2 text-sm">
+      <p class="h-fit border border-gray-500 rounded-md w-full px-4 py-2 text-sm">
         {% if obj.summary %}
         {{obj.summary}}
         {% else %}
@@ -25,8 +26,10 @@
     </div>
   </div>
 
-  <div class="py-4 my-4 flex justify-end border-t border-b">
-    <a class="bg-blue-500 hover:bg-blue-700 text-white py-1.5 px-3 rounded" href="{% url 'create-post' %}">New post</a>
+  <div class="py-4 my-4 flex justify-end border-gray-500 border-t border-b">
+    <a class="px-3 py-1.5 font-semibold text-sm bg-primary-500 hover:bg-primary-700 rounded text-white" href="{% url 'create-post' %}">
+      New post
+    </a>
   </div>
 
   {% if posts %}
@@ -48,6 +51,6 @@
     <h2 class="my-4 text-center font-bold text-2xl">No posts</h2>
   {% endif %}
 
-</div>
+</section>
 
 {% endblock %}

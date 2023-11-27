@@ -13,24 +13,21 @@
 
 
 {% block main %}
+{% if post.title %}
+<h1 class="my-4 text-center font-bold text-2xl">
+  {{post.title}}
+</h1>
+{% endif %}
+
 <!-- Post -->
-<div class="">
-  {% if post.title %}
-  <h1 class="my-4 text-center font-bold text-2xl">
-    {{post.title}}
-  </h1>
-  {% endif %}
-
-
+<section class="space-y-4">
   {% if post.image %}
   <div class="">
     <img src="{{post.image.url}}" class="" alt="img">
   </div>
   {% endif %}
 
-  <div class="">
-    <p>{{post.content}}</p>
-  </div>
+  <p>{{post.content}}</p>
 
   <!-- Post footer -->
   <div class="flex justify-between text-sm">
@@ -58,31 +55,22 @@
     {% endif %}
 
     <!-- Date created / edited -->
-    <div class="flex items-center">
-      <p>
-        {% if post.created_at == post.updated_at %}
-          {{post.created_at|timesince}}
-        {% else %}
-
-          Edited {{post.updated_at|timesince}}
-
-        {% endif %}
-      </p>
-      
-    </div>
+    <span>
+      {{post.time}}
+    </span>
 
   </div>
 
-</div>
+</section>
 
-<hr class="my-4">
+<hr class="border-gray-500 my-4">
 
 <!-- Comments -->
-<div class="">
+<section class="">
   {% if comments %}
   <h2 class="my-4 text-center font-bold text-2xl">Comments</h2>
   {% else %}
   <h2 class="my-4 text-center font-bold text-2xl">No comments</h2>
   {% endif %}
-</div>
+</section>
 {% endblock %}
