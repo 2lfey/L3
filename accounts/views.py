@@ -1,5 +1,4 @@
 # from django.shortcuts import render
-from typing import Any, Dict
 from django.views import generic as generic_views
 from django.urls import reverse_lazy
 
@@ -19,11 +18,9 @@ class RegisterView(generic_views.CreateView):
 
 class ProfileView(generic_views.UpdateView):
     template_name = 'profile.html'
-    # model = models.User
-    # fields = ['avatar', 'summary']
     form_class = forms.ProfileForm
     context_object_name = "obj"
-    success_url = reverse_lazy('profile')
+    success_url = reverse_lazy('user-profile')
 
     def get_object(self):
         return self.request.user
@@ -34,11 +31,10 @@ class UserProfileView(generic_views.DetailView):
     context_object_name = "obj"
     template_name = 'user_profile.html'
 
-    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
+    def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
-        
-        data['posts'] = posts_models.Post.objects.filter(author=self.request.user).order_by('-created_at')
-        
-        print(data)
-        
+
+        data['posts'] = posts_models.Post.objects.filter(author=models.User.objects.get(
+            id=self.request.resolver_match.kwargs['pk'])).order_by('-created_at')
+
         return data

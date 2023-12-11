@@ -21,11 +21,16 @@
 
 <!-- Post -->
 <section class="space-y-4">
+
+  <!-- Image -->
+
   {% if post.image %}
   <div class="">
     <img src="{{post.image.url}}" class="" alt="img">
   </div>
   {% endif %}
+
+  <!-- Text -->
 
   <p>{{post.content}}</p>
 
@@ -65,6 +70,17 @@
 
 <hr class="border-gray-500 my-4">
 
+<section class="flex justify-end">
+
+  <a class=" px-3 py-1.5 font-semibold text-sm bg-primary-500 hover:bg-primary-700 rounded text-white" href="{% url 'create-comment' post.id %}">
+    Comment
+  </a>
+
+</section>
+
+<hr class="border-gray-500 my-4">
+
+
 <!-- Comments -->
 <section class="">
   {% if comments %}
@@ -72,5 +88,50 @@
   {% else %}
   <h2 class="my-4 text-center font-bold text-2xl">No comments</h2>
   {% endif %}
+
+  <div class="grid grid-cols-3 gap-4">
+
+    {% for comment in comments %}
+    <div class="p-4 border border-gray-500 rounded-md flex flex-col gap-4">
+    
+      <!-- Comment header -->
+      <div class="flex justify-between items-center text-sm">
+    
+        <!-- Author -->
+    
+        <a href="{% url 'user-profile' comment.author.pk %}" class="flex items-center gap-4">
+          {% if comment.author.avatar %}
+          <div class="shrink-0">
+            <img class="block rounded-full w-8 h-8" src="{{comment.author.avatar.url}}" alt="avatar">
+          </div>
+          {% endif %}
+    
+          <span class="">{{comment.author.username}}</span>
+        </a>
+    
+        <!-- Date created / edited -->
+    
+        <span>
+          {{comment.time}}
+        </span>
+    
+      </div>
+    
+      <!-- Comment image -->
+
+      {% if comment.image %}
+      <div class="">
+        <img src="{{comment.image.url}}" class="" alt="img">
+      </div>
+      {% endif %}
+
+      <!-- Comment content -->
+    
+      <p>{{comment.content}}</p>
+    
+    </div>
+    {% endfor %}
+  </div>
+  
 </section>
 {% endblock %}

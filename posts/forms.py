@@ -7,6 +7,9 @@ class CreatePostForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user')
 
+        if self.user is None:
+            raise Exception('No user in form')
+
         super().__init__(*args, **kwargs)
 
     class Meta:
@@ -17,14 +20,10 @@ class CreatePostForm(forms.ModelForm):
             'content',
         )
 
-    def clean(self):
-        self.cleaned_data['author'] = self.user
-        super().clean()
-
     def save(self, commit=True):
         post = super().save(commit=False)
-        
-        post.author = self.cleaned_data['author']
+
+        post.author = self.user
 
         if commit:
             post.save()

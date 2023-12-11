@@ -1,5 +1,4 @@
 from django.db import models
-
 from django.utils.timezone import utc
 
 from datetime import datetime
@@ -7,18 +6,11 @@ from datetime import datetime
 # Create your models here.
 
 
-class Hashtag(models.Model):
-    name = models.CharField(max_length=256)
-
-    def __str__(self) :
-        return self.name
-
-
-class Post(models.Model):
-    author = models.ForeignKey('accounts.User', on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='posts', blank=True)
-    hashtags = models.ManyToManyField(Hashtag, blank=True)
-    content = models.TextField(max_length=10000, blank=True)
+class Comment(models.Model):
+    post = models.ForeignKey('posts.Post', on_delete=models.CASCADE, blank=False)
+    author = models.ForeignKey('accounts.User', on_delete=models.SET_NULL, null=True)
+    image = models.ImageField(upload_to='comments', blank=True)
+    content = models.CharField(max_length=2000, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -56,3 +48,7 @@ class Post(models.Model):
 
     def __str__(self) -> str:
         return self.content
+
+    @staticmethod
+    def get_comments_by_post(post):
+        return Comment.objects.filter(post=post)
