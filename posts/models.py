@@ -29,16 +29,16 @@ class Post(models.Model):
             diff = (now - self.updated_at)
             if diff.days == 0:
                 # Today 00:00
-                return self.created_at.strftime('Edited today %H:%M')
+                return self.updated_at.strftime('Edited today %H:%M')
             elif diff.days < 7:
                 # Monday 00:00
-                return self.created_at.strftime('Edited %A %H:%M')
+                return self.updated_at.strftime('Edited %A %H:%M')
             elif diff.days < 365:
                 # November 1 00:00
-                return self.created_at.strftime('Edited %B %-d %H:%M')
+                return self.updated_at.strftime('Edited %B %d %H:%M')
             else:
                 # 2023 November 1 00:00
-                return self.created_at.strftime('Edited %Y %B %-d %H:%M')
+                return self.updated_at.strftime('Edited %Y %B %d %H:%M')
         else:
             diff = (now - self.created_at)
             if diff.days == 0:
@@ -49,10 +49,10 @@ class Post(models.Model):
                 return self.created_at.strftime('%A %H:%M')
             elif diff.days < 365:
                 # November 1 00:00
-                return self.created_at.strftime('%B %-d %H:%M')
+                return self.created_at.strftime('%B %d %H:%M')
             else:
                 # 2023 November 1 00:00
-                return self.created_at.strftime('%Y %B %-d %H:%M')
+                return self.created_at.strftime('%Y %B %d %H:%M')
 
     def __str__(self) -> str:
         return self.content

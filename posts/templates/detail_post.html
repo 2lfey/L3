@@ -107,6 +107,20 @@
           {% endif %}
     
           <span class="">{{comment.author.username}}</span>
+
+          {% if comment.author == request.user %}
+          <div>
+            
+            <a class="block px-3 py-1.5 font-semibold text-sm bg-red-500 hover:bg-red-700 rounded text-white" href="{% url 'delete-comment' post.pk comment.pk %}">
+              Delete
+            </a>
+
+            <a class="block px-3 py-1.5 font-semibold text-sm bg-green-500 hover:bg-green-700 rounded text-white" href="{% url 'update-comment' post.pk comment.pk %}">
+              Update
+            </a>
+            
+          </div>
+          {% endif %}
         </a>
     
         <!-- Date created / edited -->
