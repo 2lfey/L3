@@ -1,8 +1,7 @@
-# TODO
+# Скрин данного шедевра
 
-- posts
-  - edit
-  - delete
+![Alt text](github-static/cringe.png)
 
-- index
-  - pagination
+![Alt text](github-static/index.png)
+
+> Если честно, то мне понравился жанго. прикольная штука. можна быстро сделать какой-нибудь сервис или апишку. :thumbsup:
