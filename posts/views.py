@@ -47,3 +47,20 @@ class PostDetailView(generic_views.DetailView):
         )
 
         return data
+
+
+class UpdatePostView(generic_views.UpdateView):
+    model = models.Post
+    fields = ('content', 'image',)
+    template_name = 'update_post.html'
+
+    def get_success_url(self) -> str:
+        return reverse_lazy('posts')
+
+
+class DeletePostView(generic_views.DeleteView):
+    model = models.Post
+    template_name = 'delete_post.html'
+
+    def get_success_url(self) -> str:
+        return reverse_lazy('posts')

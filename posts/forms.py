@@ -16,7 +16,7 @@ class CreatePostForm(forms.ModelForm):
         model = models.Post
         fields = (
             'image',
-            'hashtags',
+            # 'hashtags',
             'content',
         )
 

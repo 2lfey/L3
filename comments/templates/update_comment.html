@@ -14,6 +14,10 @@
 
       currentImage.src = URL.createObjectURL(file)
     })
+
+    if (currentImage.getAttribute('src')) {
+      currentImage.classList.remove('hidden')
+    }
   })
 </script>
 
@@ -29,10 +33,14 @@
 
   <div class="group relative w-full h-64 top-0 left-0">
     <div class="absolute w-full top-0 left-0">
-      <img id="current_image" class="mx-auto h-64 block" src="{{comment.image.url}}" alt="image">
+      {% if form.image.value %}
+      <img id="current_image" class="hidden mx-auto h-64 block" src="{{form.image.value.url}}" alt="image">
+      {% else %}
+      <img id="current_image" class="hidden mx-auto h-64 block" alt="image">
+      {% endif %}
     </div>
   
-    <div class="absolute opacity-0 group-hover:opacity-100 duration-500 transition-opacity top-0 left-0 w-full flex items-center justify-center">
+    <div class="absolute opacity-10 group-hover:opacity-100 duration-500 transition-opacity top-0 left-0 w-full flex items-center justify-center">
       <label for="id_image"
         class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
   

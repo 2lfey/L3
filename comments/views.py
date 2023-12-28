@@ -26,15 +26,6 @@ class CreateComment(generic_views.CreateView):
 
         return kwargs
 
-
-class DeleteComment(generic_views.DeleteView):
-    model = models.Comment
-    template_name = 'delete_comment.html'
-
-    def get_success_url(self) -> str:
-        return reverse_lazy('detail-post', kwargs={'pk': self.request.resolver_match.kwargs['pk']})
-
-
 class DeleteComment(generic_views.DeleteView):
     model = models.Comment
     template_name = 'delete_comment.html'
