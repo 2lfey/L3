@@ -14,6 +14,7 @@ class PostListView(generic_views.ListView):
     model = models.Post
     context_object_name = "posts"
     template_name = 'posts.html'
+    paginate_by = 50
 
 
 class CreatePostView(generic_views.CreateView):
@@ -37,6 +38,8 @@ class PostDetailView(generic_views.DetailView):
 
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         data = super().get_context_data(**kwargs)
+
+        data['user'] = self.request.user
 
         data['comments'] = comments_models.Comment.get_comments_by_post(
             models.Post.objects.get(

@@ -65,15 +65,24 @@
 
 {% block footer %}
 
-{% if posts %}
+{% if is_paginated %}
 <div class="flex flex-col gap-4">
   <div class="flex items-center justify-center gap-4">
-    <a class="px-3 py-1.5 font-semibold text-sm bg-primary-500 hover:bg-primary-700 rounded text-white" href="#">
-      <<- Previous page </a>
+    {% if page_obj.has_previous %}
+    <a class="px-3 py-1.5 font-semibold text-sm bg-primary-500 hover:bg-primary-700 rounded text-white" href="?page={{ page_obj.previous_page_number  }}">
+      <<- Previous page
+    </a>
+    {% endif %}
 
-        <a class="px-3 py-1.5 font-semibold text-sm bg-primary-500 hover:bg-primary-700 rounded text-white" href="#">
-          Next page ->>
-        </a>
+    <span class="text-sm font-semibold">
+      {{ page_obj.number }}/{{ page_obj.paginator.num_pages }}
+    </span>
+
+    {% if page_obj.has_next %}
+    <a class="px-3 py-1.5 font-semibold text-sm bg-primary-500 hover:bg-primary-700 rounded text-white" href="?page={{ page_obj.next_page_number }}">
+      Next page ->>
+    </a>
+    {% endif %}
   </div>
 
   {% include 'components/copyright.html' %}
